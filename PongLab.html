@@ -1,0 +1,319 @@
+<HTML>
+<HEAD>
+<Title>CS132 - Lab #5 - Pong!</Title>
+</HEAD>
+
+<BODY BGColor='#FFFFFF' text='#000000' link='#473C8B' vlink='#757575'>
+
+<hr>
+<center>
+<font size=+2 color='#006400'>
+<b>
+Computer Science 132<br>
+Introduction To Computing II<br>
+</b>
+</font>
+<font size=-1>
+<br>
+Dickinson College<br>
+Spring Semester 2003<br>
+Grant Braught
+</font>
+</center>
+<hr>
+<center><font size=+1 color='#000064'>
+  <b>Lab #5 - Pong</b><br>
+  <br>
+  <font size=+1 color='#006400'> <b>Introduction:</b> </font> 
+</center>
+<UL>
+<p>You have just been hired by the Object-Oriented Language Development Company (OLD Co.) They have begun development of what they believe to be a radically new computer game, with the wholly original name of Pong. Figure 1 shows a picture of the OLD Co. Pong game:
+<br><br>
+<center><img src="pong.png"></center>
+
+<p>Pong is a two player game in which each player attempts to prevent the pong-ball from reaching the wall behind his pong-paddle.  A player deflects the pong-ball before it reaches the wall by placing his pong-paddle into path of the pong-ball. This causes the ball to bounce off of the paddle in the opposite direction. If the ball reaches the wall behind a player's paddle, the opponent scores.  The number of points scored is dependent on the region of the wall contacted by the ball.  The closer to the center of the wall the greater the number of points scored.
+
+<p>The high-paid software engineers at OLD Co. have spent years designing the Pong program.  They have identified the classes that describe the objects the program will use.  They have carefully defined the public interfaces of each of the objects.  The specifications for these classes were handed off to the programmers who completed the majority of the implementation. However, just before the project was completed, all of the programmers were offered huge salaries by start-up dot com companies and simply quit on the spot!  In exchange for a big check I agreed to write these classes for OLD Co.  But being, ever the educator, I decided that writing these classes would be a good experience for you. Of course, I keep the check from OLD Co!
+
+<p>The remainder of this lab describes how to get setup to complete the Pong game and the details of the classes you must write.
+</UL>
+
+<font size=+1 color='#006400'> <b>Setup:</b> </font> 
+<UL>
+  <p>Before beginning the lab you will need to do the following things: <br>
+    <br>
+  <OL>
+    <LI>Copy the <strong>Pongtastic Student</strong> folder from Stushare to your 
+      network drive.<br>
+      <br>
+    <LI>This folder contains the following .class files:<br>
+      <br>
+      <ul>
+        <table cellpadding=5 cellspacing=5>
+          <tr> 
+            <td> <LI><code><a href="Pong.class">Pong.class</a></code> 
+              <LI><code><a href="Pong$1.class">Pong$1.class</a></code> 
+              <LI><code><a href="PongCanvas.class">PongCanvas.class</a></code> 
+              <LI><code><a href="PongBallTimer.class">PongBallTimer.class</a></code> 
+            </td>
+            <td> <LI><code><a href="PongBall.class">PongBall.class</a></code> 
+              <LI><code><a href="PongPaddle.class">PongPaddle.class</a></code> 
+              <LI><code><a href="PongScore.class">PongScore.class</a></code> </td>
+          </tr>
+        </table>
+      </UL>
+      <P>These files contain the compiled Java byte-code for OLD Co.'s nearly 
+        complete version of the Pong game. <br>
+        <br>
+    <LI>Mr. Martin has created a java project and a Pongtastic.java file. Pongtastic.java 
+      contains a driver class that is used to kick-off the <code>main</code> method 
+      of the <code>Pong</code> class. Compile and execute the project. If you 
+      have done everything correctly, the Pong game should appear. However, as 
+      described above the game is incomplete and therefore it does not work! The 
+      paddles and the ball do not move and the score-keeping mechanism does not 
+      work.
+  </OL>
+</UL>
+
+<font size=+1 color='#006400'> <b>Assignment:</b> </font> 
+<UL>
+  <p>Your assignment is to write and test three classes that are missing from 
+    the Pong game. These classes are the <code>PongScore</code>, <code>PongPaddle</code> 
+    and <code>PongBall</code> classes. 
+  <p><b>The <code>PongBall</code> Class:</b> 
+  <UL>
+    <p><i>Description:</i> 
+    <UL>
+      <p>The <code>PongBall</code> class describes the object which the Pong application 
+        uses to represent the ball that bounces around the screen. The following 
+        class diagram illustrates the information and operations that are defined 
+        by the <code>PongBall</code> class. 
+      <p> 
+        <center>
+          <img src="PongBallClassDiag.png"> 
+        </center>
+      <p>When the Pong application is executed it creates a new <code>PongBall</code> 
+        object that is positioned at the center of the playing field. Approximately 
+        every 10<sup>th</sup> of a second the Pong application calls the <code>move()</code> 
+        method on its <code>PongBall</code> object causing the ball to update 
+        its position. Following the call to <code>move()</code> the Pong application 
+        uses the <code>getX()</code> and <code>getY()</code> methods to find the 
+        new location of the ball. If the Pong application determines that the 
+        ball would have collided with a wall or a paddle it will invoke the <code>bounceX()</code> 
+        or the <code>bounceY()</code> method to change the horizontal or vertical 
+        direction of the ball. Finally, the Pong application will draw the ball 
+        on the screen at its new location and the process will be repeated again 
+        in another 10<sup>th</sup> of a second. 
+    </UL>
+    <p><i>Implementation:</i> 
+    <UL>
+      <p>Create and implement the <code>PongBall</code> class in the file <code>PongBall.java</code>.
+      <p>To implement the <code>PongBall</code> class you will need to define 
+        instance data for the x and y position of the ball as well as the velocity 
+        of the ball in the x and y directions. Additional information about the 
+        constructors and instance methods of the <code>PongBall</code> class can 
+        be found in the <a href="PongBall.html">Java Documentation for the <code>PongBall</code> 
+        class</a>. Your implementation of the <code>PongBall</code> class must 
+        meet the specifications given in the Java Documentation, so please study 
+        it carefully. 
+    </UL>
+    <p><i>Testing:</i> 
+    <UL>
+      <p>One way to test the <code>PongBall</code> class would be to add it to 
+        the Pong application and see if the ball begins moving correctly. However, 
+        because we do not know precisely how the Pong application uses the <code>PongBall</code> 
+        class, it would be very difficult to determine simply by watching the 
+        Pong application if the <code>PongBall</code> class behaves correctly 
+        in every situation. Thus, we will test its behavior independently. 
+      <p>To test the <code>PongBall</code> class you will need to write a class 
+        named <code>PongBallTest</code> that contains a <code>main</code> method. 
+        The <code>main</code> method in the <code>PongBallTest</code> class should 
+        create several <code>PongBall</code> objects and test their instance methods. 
+        For example, the following snippet of code will create a <code>PongBall</code> 
+        object and test the <code>getX()</code>, <code>getY()</code> and <code>move()</code> 
+        methods.  Note: you will execute this class with the <strong>Execute File</strong> button </p>
+        <br>
+<code>
+<blockquote>public class PongBallTest <br>
+{<br>
+&nbsp;&nbsp;public static void main(String[] args) <br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PongBall ball = new PongBall(10, 20, 2, 4); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("x should be 10, x is: "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ ball.getX());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("y should be 20, y is: "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ ball.getY()); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;ball.move();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("x should be 12, x is: "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ ball.getX());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("y should be 24, y is: "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ ball.getY());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ball.move();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("x should be 14, x is: "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ ball.getX());<br>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("y should be 28, y is: "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ ball.getY());<br>
+&nbsp;&nbsp;}<br>
+}</blockquote></code>    
+      <p>Notice that the output of the test program indicates both the correct 
+        values and the actual values that are computed. Writing your test programs 
+        in this way makes it easy to tell if the class you are testing is working 
+        correctly. 
+      <p>You will need to add additional code to the <code>PongBallTest</code> 
+        class to test the <code>bounceX()</code> and <code>bounceY()</code> methods. 
+    </UL>
+    <p><i>Integration:</i> 
+    <UL>
+      <p>Once you have fully tested your <code>PongBall</code> class you can 
+	  use the <strong>Execute Project</strong> button.
+      <p>Now the Pong application will run using your <code>PongBall</code> class. 
+        When the Pong window appears, press the "B" key on the keyboard and the 
+        ball should begin bouncing around the playing field. 
+    </UL>
+  </UL>
+  <p><b>The <code>PongScore</code> Class:</b> 
+  <UL>
+    <p><i>Description:</i> 
+    <UL>
+      <p>The <code>PongScore</code> class describes the object that the Pong application 
+        uses to keep track of the score for each player. The following class diagram 
+        illustrates the information and operations that are defined by the <code>PongScore</code> 
+        class. 
+      <p> 
+        <center>
+          <img src="PongScoreClassDiag.png"> 
+        </center>
+      <p>When the Pong application is executed it creates two <code>PongScore</code> 
+        objects, one for the blue player and one for the green player. Each time 
+        the ball contacts the end wall behind the blue paddle, the <code>scorePoints(...)</code> 
+        method of the green player's <code>PongScore</code> object is invoked, 
+        and vice versa. When invoking the <code>scorePoints(...)</code> method, 
+        the Pong application passes it an argument corresponding to the number 
+        of points indicated in the region of the wall that was contacted. The 
+        Pong application will then invoke the <code>getScore()</code> method to 
+        determine the score to be displayed beside the player's name below the 
+        playing field. 
+    </UL>
+    <p><i>Implementation:</i> 
+    <UL>
+      <p>Create and implement the <code>PongScore</code> class in the file <code>PongScore.java</code> 
+        . Your implementation must meet the 
+        specifications given in the <a href="PongScore.html">Java Documentation 
+        for the <code>PongScore</code> class</a>. 
+    </UL>
+    <p><i>Testing:</i> 
+    <UL>
+      <p>To test the <code>PongScore</code> class write a class named <code>PongScoreTest</code> 
+        that contains a <code>main</code> method. Your <code>PongScoreTest</code> 
+        program should use a format similar to that used in <code>PongBallTest</code>. 
+        Be sure to create several <code>PongScore</code> objects and to call the 
+        <code>scorePoints(...)</code> method with several different arguments. 
+    </UL>
+    <p><i>Integration:</i> 
+    <UL>
+      <p>Once you have fully tested your <code>PongScore</code> class you can 
+        <strong>Execute Project</strong> .
+      <p>When you run the Pong application and press the "B" key, the ball will 
+        again begin to bounce around the playing field. However, now each time 
+        the ball contacts the end wall the opponent's score will be incremented 
+        by the appropriate number of points. 
+    </UL>
+  </UL>
+  <p><b>The <code>PongPaddle</code> Class:</b> 
+  <UL>
+    <p><i>Description:</i> 
+    <UL>
+      <p>The <code>PongPaddle</code> class describes the objects that the Pong 
+        application uses to keep track of the size and location of the pong paddles. 
+        The following class diagram illustrates the the information and operations 
+        that are defined by the <code>PongPaddle</code> class: 
+      <p> 
+        <center>
+          <img src="PongPaddleClassDiag.png"> 
+        </center>
+      <p>When the Pong application is run it creates two new <code>PongPaddle</code> 
+        objects: one for the blue player positioned at the left end of the playing 
+        field, the other for the green player positioned at the right end of the 
+        playing field. When the blue player presses the "A" key, the Pong application 
+        invokes the <code>moveUp(...)</code> method of the blue player's <code>PongPaddle</code> 
+        object. Conversely, when the blue player presses the "Z" key the Pong 
+        application invokes the <code>moveDown(...)</code> method. Similar actions 
+        are taken using the green player's <code>PongPaddle</code> object when 
+        the "M" and "K" keys are pressed. The Pong application then uses the <code>getLeftX()</code>, 
+        <code>getTopY()</code>, <code>getRightX()</code> and <code>getBottomY()</code> 
+        methods to determine where on the screen the blue and green paddles should 
+        be drawn. These methods are also used by the Pong application to determine 
+        when the ball collides with one of the paddles. 
+    </UL>
+    <p><i>Implementation:</i> 
+    <UL>
+      <p>Create and Implement the <code>PongPaddle</code> class in the file <code>PongPaddle.java</code> 
+        . Your implementation must meet the 
+        specifications given in the <a href="PongPaddle.html">Java Documentation 
+        for the <code>PongPaddle</code> class</a>. 
+    </UL>
+    <p><i>Testing:</i> 
+    <UL>
+      <p>To test the <code>PongPaddle</code> class write a class named <code>PongPaddleTest</code> 
+        that contains a <code>main</code> method. Your <code>PongPaddleTest</code> 
+        program should use a format similar to that used in <code>PongBallTest</code>. 
+        Be sure to create several <code>PongPaddle</code> objects and to call 
+        all of the instance methods several several times with several different 
+        arguments (when appropriate). 
+    </UL>
+    <p><i>Integration:</i> 
+    <UL>
+      <p>Once you have tested your <code>PongPaddle</code> class you can <strong>Execute Project</strong>. 
+      <p>When the Pong application is run, pressing the "B" key begins the ball 
+        bouncing as before. However, now when the "A" or "Z" keys are pressed 
+        the blue paddle will move up or down. Similarly, when the "K" or "M" keys 
+        are pressed the green paddle will move up or down. 
+      <p>Congratulations! You now have a complete working Pong application! 
+    </UL>
+  </UL>
+</UL>
+
+<font size=+1 color='#006400'>
+<b>Grading</b>
+</font>
+<UL>
+<p> Your score for each program will be determined by the correctness of its execution, the completeness of the testing,
+and its formatting and readability.
+<p>On the due date for this lab, you must submit (not print) the following files:
+<UL>
+<LI><code>PongScore.java</code>
+<LI><code>PongScoreTest.java</code>
+<LI><code>PongPaddle.java</code>
+<LI><code>PongPaddleTest.java</code>
+<LI><code>PongBall.java</code>
+<LI><code>PongBallTest.java</code>
+</UL>
+
+
+<p>When writing your programs please be sure to pay attention to the following readability and maintainability issues:
+<UL>
+<LI>Align and indent your code following the examples in the text.
+<LI>Use Checkstyle on every java file.  Make sure the you eliminate all Checkstyle problems.
+<LI>Use blank lines in your code as clues to the reader that indicate logically distinct parts of your program.
+<LI>Name all classes, variables, and methods as per the assignment.
+<LI>Choose descriptive names for and other variables. 
+<LI>Use comments to describe the role of statements in solving the problem if it is not obvious from the Java code itself. 
+</UL>
+</UL>
+
+<hr>
+<font size=-2>
+<script language="JavaScript">
+          <!---//hide script from old browsers
+          document.write( "This document was last updated "+ document.lastModified + "<br><br>" );
+          //end hiding contents --->
+          </script>
+</font>
+
+</BODY>
+</HTML>
+
+
+
+
+
